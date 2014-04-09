@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Pim</title>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="http://192.168.2.10:3000/socket.io/socket.io.js">
+    </script>
+</head>
+<body>
+    <pre style="font-size:20px;" id="pim_text"></pre>
+    <div align="center">
+        <input id="typing" type="text" x-webkit-speech/>
+    </div>
+
+    <script type="text/javascript">
+    var socket = io.connect('http://192.168.2.10:3000');
+        $("#typing").bind('input',function(){
+            var voice_command = $("#typing").val();
+            console.log(voice_command);
+            if(voice_command == "เปิด " || voice_command == "on " || voice_command == "on"){
+                console.log("Successful!");
+                socket.emit('pressBtnData', { button:'on'});
+            }else if(voice_command == "ปิด " || voice_command == "off " ||voice_command == "off"){
+                console.log("Successful!");
+                socket.emit('pressBtnData', { button:'off'});
+            }
+    });
+    </script>
+</body>
+</html>
